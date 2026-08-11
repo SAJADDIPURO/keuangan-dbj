@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Input Data — Keuangan PT Dipuro Berkah Jaya</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <div>
+      <p class="brand-eyebrow">PT Dipuro Berkah Jaya</p>
+      <h1 class="brand-name">Input Data Harian &amp; Bulanan</h1>
+    </div>
+    <div class="masthead-meta">
+      <div id="todayLabel">—</div>
+      <div>Masuk sebagai <strong id="userEmail">—</strong></div>
+      <div class="masthead-actions">
+        <a href="index.html" class="btn-header">← Kembali ke Dashboard</a>
+        <a href="#" onclick="logout();return false;" class="btn-logout">Keluar</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs">
+  <button class="tab-btn active" onclick="showTab('tabKH', this)">Keuangan Harian</button>
+  <button class="tab-btn" onclick="showTab('tabPiutang', this)">Piutang</button>
+  <button class="tab-btn" onclick="showTab('tabPersediaan', this)">Persediaan</button>
+  <button class="tab-btn" onclick="showTab('tabPelayanan', this)">Pelayanan</button>
+  <button class="tab-btn" onclick="showTab('tabProduk', this)">Produk Terlaris</button>
+  <button class="tab-btn" onclick="showTab('tabSDM', this)">SDM</button>
+  <button class="tab-btn" onclick="showTab('tabBulanan', this)">Keuangan Bulanan</button>
+</nav>
+
+<main>
+
+  <!-- ========== KEUANGAN HARIAN ========== -->
+  <section class="panel" id="tabKH">
+    <h2 class="section-title">Input Keuangan Harian</h2>
+    <p class="section-sub">Omzet, transaksi, kas masuk/keluar, dan komposisi pembayaran hari ini.</p>
+    <hr class="rule">
+    <div class="field-grid">
+      <div class="field"><label>Tanggal</label><input type="date" id="kh-tanggal"></div>
+      <div class="field"><label>Omzet (Rp)</label><input type="number" id="kh-omzet" placeholder="0"></div>
+      <div class="field"><label>Jumlah Transaksi</label><input type="number" id="kh-jumlah_transaksi" placeholder="0"></div>
+      <div class="field"><label>Laba Kotor (%)</label><input type="number" step="0.1" id="kh-laba_kotor_persen" placeholder="0"></div>
+      <div class="field"><label>Kas Masuk (Rp)</label><input type="number" id="kh-kas_masuk" placeholder="0"></div>
+      <div class="field"><label>Kas Keluar (Rp)</label><input type="number" id="kh-kas_keluar" placeholder="0"></div>
+      <div class="field"><label>Pembayaran QRIS (Rp)</label><input type="number" id="kh-qris" placeholder="0"></div>
+      <div class="field"><label>Pembayaran Tunai (Rp)</label><input type="number" id="kh-tunai" placeholder="0"></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn" onclick="simpanKeuanganHarian()">Simpan Keuangan Harian</button>
+    </div>
+    <div id="kh-msg"></div>
+  </section>
+
+  <!-- ========== PIUTANG ========== -->
+  <section class="panel hidden" id="tabPiutang">
+    <h2 class="section-title">Input Piutang</h2>
+    <p class="section-sub">Tambahkan piutang baru, lalu tandai lunas kalau sudah dibayar.</p>
+    <hr class="rule">
+    <div class="field-grid">
+      <div class="field"><label>Tanggal</label><input type="date" id="pt-tanggal"></div>
+      <div class="field"><label>Nama Pelanggan</label><input type="text" id="pt-pelanggan" placeholder="Nama pelanggan"></div>
+      <div class="field"><label>Jumlah (Rp)</label><input type="number" id="pt-jumlah" placeholder="0"></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn" onclick="tambahPiutang()">Tambah Piutang</button>
+    </div>
+    <div id="pt-msg"></div>
+
+    <h3 style="font-family:'Manrope',sans-serif;font-size:15px;margin:26px 0 10px;">Piutang Belum Lunas</h3>
+    <div id="pt-list"></div>
+  </section>
+
+  <!-- ========== PERSEDIAAN ========== -->
+  <section class="panel hidden" id="tabPersediaan">
+    <h2 class="section-title">Input Persediaan</h2>
+    <p class="section-sub">Kondisi stok obat hari ini.</p>
+    <hr class="rule">
+    <div class="field-grid">
+      <div class="field"><label>Tanggal</label><input type="date" id="ps-tanggal"></div>
+      <div class="field"><label>Nilai Persediaan (Rp)</label><input type="number" id="ps-nilai_persediaan" placeholder="0"></div>
+      <div class="field"><label>Fast Moving Habis (item)</label><input type="number" id="ps-fast_moving_habis" placeholder="0"></div>
+      <div class="field"><label>Slow Moving (%)</label><input type="number" step="0.1" id="ps-slow_moving_persen" placeholder="0"></div>
+      <div class="field"><label>Akan Expired &lt; 6 Bulan (item)</label><input type="number" id="ps-expired_6_bulan" placeholder="0"></div>
+      <div class="field"><label>Akan Expired &lt; 3 Bulan (item)</label><input type="number" id="ps-expired_3_bulan" placeholder="0"></div>
+      <div class="field"><label>Jumlah Stock Out (item)</label><input type="number" id="ps-stock_out" placeholder="0"></div>
+      <div class="field"><label>Ketersediaan Obat (%)</label><input type="number" step="0.1" id="ps-ketersediaan_persen" placeholder="100"></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn" onclick="simpanPersediaan()">Simpan Persediaan</button>
+    </div>
+    <div id="ps-msg"></div>
+  </section>
+
+  <!-- ========== PELAYANAN ========== -->
+  <section class="panel hidden" id="tabPelayanan">
+    <h2 class="section-title">Input Pelayanan</h2>
+    <p class="section-sub">Resep, waktu layanan, komplain, dan pelanggan hari ini.</p>
+    <hr class="rule">
+    <div class="field-grid">
+      <div class="field"><label>Tanggal</label><input type="date" id="pl-tanggal"></div>
+      <div class="field"><label>Resep Masuk</label><input type="number" id="pl-resep_masuk" placeholder="0"></div>
+      <div class="field"><label>Resep Selesai (%)</label><input type="number" step="0.1" id="pl-resep_selesai_persen" placeholder="100"></div>
+      <div class="field"><label>Waktu Layanan Rata-rata (menit)</label><input type="number" step="0.1" id="pl-waktu_layanan_menit" placeholder="0"></div>
+      <div class="field"><label>Komplain Pelanggan</label><input type="number" id="pl-komplain" placeholder="0"></div>
+      <div class="field"><label>Pelanggan Baru</label><input type="number" id="pl-pelanggan_baru" placeholder="0"></div>
+      <div class="field"><label>Pelanggan Loyal</label><input type="number" id="pl-pelanggan_loyal" placeholder="0"></div>
+      <div class="field"><label>Pengantaran Obat</label><input type="number" id="pl-pengantaran" placeholder="0"></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn" onclick="simpanPelayanan()">Simpan Pelayanan</button>
+    </div>
+    <div id="pl-msg"></div>
+  </section>
+
+  <!-- ========== PRODUK TERLARIS ========== -->
+  <section class="panel hidden" id="tabProduk">
+    <h2 class="section-title">Input Produk Terlaris</h2>
+    <p class="section-sub">Isi 5 produk terlaris untuk tanggal ini, peringkat 1 sampai 5.</p>
+    <hr class="rule">
+    <div class="field-grid">
+      <div class="field"><label>Tanggal</label><input type="date" id="pd-tanggal"></div>
+    </div>
+
+    <div id="pd-rows" style="margin-top:16px;display:flex;flex-direction:column;gap:12px;"></div>
+
+    <div class="btn-row">
+      <button class="btn" onclick="simpanProdukTerlaris()">Simpan Produk Terlaris</button>
+    </div>
+    <div id="pd-msg"></div>
+  </section>
+
+  <!-- ========== SDM ========== -->
+  <section class="panel hidden" id="tabSDM">
+    <h2 class="section-title">Input SDM</h2>
+    <p class="section-sub">Kehadiran, kedisiplinan, dan kebersihan apotek hari ini.</p>
+    <hr class="rule">
+    <div class="field-grid">
+      <div class="field"><label>Tanggal</label><input type="date" id="sd-tanggal"></div>
+      <div class="field"><label>Kehadiran Karyawan (%)</label><input type="number" step="0.1" id="sd-kehadiran_persen" placeholder="100"></div>
+      <div class="field"><label>Keterlambatan (orang)</label><input type="number" id="sd-keterlambatan" placeholder="0"></div>
+      <div class="field">
+        <label>Briefing Pagi</label>
+        <select id="sd-briefing_pagi">
+          <option value="true">Ya</option>
+          <option value="false">Tidak</option>
+        </select>
+      </div>
+      <div class="field"><label>SOP Dipatuhi (%)</label><input type="number" step="0.1" id="sd-sop_dipatuhi_persen" placeholder="100"></div>
+      <div class="field">
+        <label>Kebersihan Apotek</label>
+        <select id="sd-kebersihan">
+          <option value="Baik">Baik</option>
+          <option value="Cukup">Cukup</option>
+          <option value="Kurang">Kurang</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn" onclick="simpanSDM()">Simpan SDM</button>
+    </div>
+    <div id="sd-msg"></div>
+  </section>
+
+  <!-- ========== KEUANGAN BULANAN ========== -->
+  <section class="panel hidden" id="tabBulanan">
+    <h2 class="section-title">Input Keuangan Bulanan</h2>
+    <p class="section-sub">Target omzet, HPP, dan biaya operasional untuk bulan berjalan.</p>
+    <hr class="rule">
+    <div class="field-grid">
+      <div class="field"><label>Bulan</label><input type="month" id="kb-bulan"></div>
+      <div class="field"><label>Target Omzet (Rp)</label><input type="number" id="kb-target_omzet" placeholder="0"></div>
+      <div class="field"><label>HPP (Rp)</label><input type="number" id="kb-hpp" placeholder="0"></div>
+      <div class="field"><label>Biaya Operasional (Rp)</label><input type="number" id="kb-biaya_operasional" placeholder="0"></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn" onclick="simpanKeuanganBulanan()">Simpan Keuangan Bulanan</button>
+    </div>
+    <div id="kb-msg"></div>
+  </section>
+
+</main>
+
+<footer class="credit">Keuangan PT Dipuro Berkah Jaya — Input Data</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script src="input.js"></script>
+</body>
+</html>

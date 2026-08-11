@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Masuk — Keuangan PT Dipuro Berkah Jaya</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="login-wrap">
+  <div class="login-card">
+    <p class="brand-eyebrow">PT Dipuro Berkah Jaya</p>
+    <h1>Masuk ke Sistem</h1>
+
+    <div class="field">
+      <label>Email</label>
+      <input type="email" id="loginEmail" placeholder="nama@apotek.com" autocomplete="username">
+    </div>
+    <div class="field">
+      <label>Kata Sandi</label>
+      <input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password">
+    </div>
+
+    <button class="btn" id="loginBtn" onclick="doLogin()">Masuk</button>
+    <div id="loginMsg"></div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script>
+  const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  // Kalau ternyata sudah ada sesi login aktif, langsung redirect (jangan tampilkan form lagi)
+  (async () => {
+    const { data: { session } } = await supabaseClient.auth.getSession();
+    if (session) redirectByRole(session);
+  })();
+
+  function redirectByRole(session) {
+    const role = session.user.app_metadata?.role || "user";
+    window.location.href = (role === "admin") ? "index.html" : "input.html";
+  }
+
+  function showLoginMsg(ok, text) {
+    document.getElementById("loginMsg").innerHTML = `<div class="msg ${ok ? "ok" : "err"}">${text}</div>`;
+  }
+
+  async function doLogin() {
+    const email = document.getElementById("loginEmail").value.trim();
+    const password = document.getElementById("loginPassword").value;
+    if (!email || !password) return showLoginMsg(false, "Email dan kata sandi wajib diisi.");
+
+    const btn = document.getElementById("loginBtn");
+    btn.disabled = true;
+    btn.textContent = "Memproses...";
+
+    const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+
+    btn.disabled = false;
+    btn.textContent = "Masuk";
+
+    if (error) return showLoginMsg(false, "Email atau kata sandi salah.");
+    redirectByRole(data.session);
+  }
+
+  // Enter di kolom password langsung submit
+  document.getElementById("loginPassword").addEventListener("keydown", (e) => {
+    if (e.key === "Enter") doLogin();
+  });
+</script>
+</body>
+</html>

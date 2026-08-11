@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kelola Data — Keuangan PT Dipuro Berkah Jaya</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  table.data input, table.data select{
+    font-family:'JetBrains Mono', monospace;
+    padding:6px 8px; border:1.5px solid var(--green-line); border-radius:8px;
+    font-size:12.5px; background:var(--white); color:var(--ink); width:100%;
+  }
+  table.data td{vertical-align:middle;}
+  .row-actions{display:flex; gap:6px; white-space:nowrap;}
+  .row-actions .btn, .row-actions .btn.secondary{padding:6px 12px; font-size:12px;}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <div>
+      <p class="brand-eyebrow">PT Dipuro Berkah Jaya</p>
+      <h1 class="brand-name">Kelola Data</h1>
+    </div>
+    <div class="masthead-meta">
+      <div id="todayLabel">—</div>
+      <div>Masuk sebagai <strong id="userEmail">—</strong></div>
+      <div class="masthead-actions">
+        <a href="index.html" class="btn-header">← Kembali ke Dashboard</a>
+        <a href="#" onclick="logout();return false;" class="btn-logout">Keluar</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs">
+  <button class="tab-btn active" onclick="showTab('tab-kh', this)">Keuangan Harian</button>
+  <button class="tab-btn" onclick="showTab('tab-piutang', this)">Piutang</button>
+  <button class="tab-btn" onclick="showTab('tab-persediaan', this)">Persediaan</button>
+  <button class="tab-btn" onclick="showTab('tab-pelayanan', this)">Pelayanan</button>
+  <button class="tab-btn" onclick="showTab('tab-produk', this)">Produk Terlaris</button>
+  <button class="tab-btn" onclick="showTab('tab-sdm', this)">SDM</button>
+  <button class="tab-btn" onclick="showTab('tab-bulanan', this)">Keuangan Bulanan</button>
+</nav>
+
+<main>
+  <section class="panel" id="tab-kh">
+    <h2 class="section-title">Kelola Keuangan Harian</h2>
+    <p class="section-sub">30 data terakhir. Klik Edit untuk ubah, Hapus untuk buang data yang salah.</p>
+    <hr class="rule">
+    <div class="btn-row"><button class="btn secondary" onclick="tambahBaris('kh')">+ Tambah Baris</button></div>
+    <div id="wrap-kh" style="margin-top:14px;"></div>
+  </section>
+
+  <section class="panel hidden" id="tab-piutang">
+    <h2 class="section-title">Kelola Piutang</h2>
+    <p class="section-sub">50 data terakhir.</p>
+    <hr class="rule">
+    <div class="btn-row"><button class="btn secondary" onclick="tambahBaris('piutang')">+ Tambah Baris</button></div>
+    <div id="wrap-piutang" style="margin-top:14px;"></div>
+  </section>
+
+  <section class="panel hidden" id="tab-persediaan">
+    <h2 class="section-title">Kelola Persediaan</h2>
+    <p class="section-sub">30 data terakhir.</p>
+    <hr class="rule">
+    <div class="btn-row"><button class="btn secondary" onclick="tambahBaris('persediaan')">+ Tambah Baris</button></div>
+    <div id="wrap-persediaan" style="margin-top:14px;"></div>
+  </section>
+
+  <section class="panel hidden" id="tab-pelayanan">
+    <h2 class="section-title">Kelola Pelayanan</h2>
+    <p class="section-sub">30 data terakhir.</p>
+    <hr class="rule">
+    <div class="btn-row"><button class="btn secondary" onclick="tambahBaris('pelayanan')">+ Tambah Baris</button></div>
+    <div id="wrap-pelayanan" style="margin-top:14px;"></div>
+  </section>
+
+  <section class="panel hidden" id="tab-produk">
+    <h2 class="section-title">Kelola Produk Terlaris</h2>
+    <p class="section-sub">50 data terakhir.</p>
+    <hr class="rule">
+    <div class="btn-row"><button class="btn secondary" onclick="tambahBaris('produk')">+ Tambah Baris</button></div>
+    <div id="wrap-produk" style="margin-top:14px;"></div>
+  </section>
+
+  <section class="panel hidden" id="tab-sdm">
+    <h2 class="section-title">Kelola SDM</h2>
+    <p class="section-sub">30 data terakhir.</p>
+    <hr class="rule">
+    <div class="btn-row"><button class="btn secondary" onclick="tambahBaris('sdm')">+ Tambah Baris</button></div>
+    <div id="wrap-sdm" style="margin-top:14px;"></div>
+  </section>
+
+  <section class="panel hidden" id="tab-bulanan">
+    <h2 class="section-title">Kelola Keuangan Bulanan</h2>
+    <p class="section-sub">12 bulan terakhir.</p>
+    <hr class="rule">
+    <div class="btn-row"><button class="btn secondary" onclick="tambahBaris('bulanan')">+ Tambah Baris</button></div>
+    <div id="wrap-bulanan" style="margin-top:14px;"></div>
+  </section>
+</main>
+
+<footer class="credit">Keuangan PT Dipuro Berkah Jaya — Kelola Data</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script src="kelola.js"></script>
+</body>
+</html>

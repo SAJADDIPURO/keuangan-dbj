@@ -1,0 +1,293 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+:root{
+  --white: #FFFFFF;
+  --green: #01b360;
+  --green-soft: #EAFCF1;
+  --green-line: #C9F2DA;
+  --ink: #16281F;
+  --ink-soft: #5C7568;
+
+  --amber: #B7791F;
+  --amber-bg: #FBF0DC;
+  --red: #E0473A;
+  --red-bg: #FDE7E4;
+
+  --radius: 18px;
+  --shadow-sm: 0 1px 2px rgba(22,40,31,0.06), 0 1px 1px rgba(22,40,31,0.04);
+  --shadow-md: 0 8px 24px rgba(22,40,31,0.08), 0 2px 6px rgba(22,40,31,0.05);
+}
+
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{
+  margin:0;
+  background:var(--white);
+  color:var(--ink);
+  font-family:'Inter', sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+
+.num{font-family:'JetBrains Mono', monospace; font-variant-numeric:tabular-nums;}
+
+/* ---------- Header (hijau muda solid, tanpa gradasi) ---------- */
+.masthead{
+  background:var(--green);
+  color:var(--white);
+  padding:32px 24px 26px;
+}
+.masthead-inner{
+  max-width:1140px; margin:0 auto;
+  display:flex; align-items:flex-end; justify-content:space-between; gap:16px; flex-wrap:wrap;
+}
+.brand-eyebrow{
+  font-family:'JetBrains Mono', monospace;
+  font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--white); opacity:0.85; margin:0 0 6px;
+}
+.brand-name{
+  font-family:'Manrope', sans-serif;
+  font-weight:800;
+  font-size:clamp(24px, 3.4vw, 34px);
+  margin:0;
+  letter-spacing:-0.02em;
+  color:var(--white);
+}
+.masthead-meta{
+  text-align:right;
+  font-family:'JetBrains Mono', monospace;
+  font-size:12px;
+  color:var(--white);
+  opacity:0.9;
+  line-height:1.7;
+}
+.masthead-meta strong{color:var(--white); font-weight:700; opacity:1;}
+
+.masthead-actions{
+  margin-top:10px;
+  display:flex; align-items:center; gap:10px; justify-content:flex-end; flex-wrap:wrap;
+}
+/* Tombol Input Data Harian: putih solid, TANPA gradasi */
+.btn-header{
+  display:inline-flex; align-items:center; gap:6px;
+  text-decoration:none;
+  font-family:'Inter', sans-serif; font-weight:700; font-size:12.5px;
+  color:var(--ink);
+  padding:9px 18px;
+  border-radius:999px;
+  background:var(--white);
+  box-shadow:var(--shadow-sm);
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+.btn-header:hover{transform:translateY(-1px); box-shadow:var(--shadow-md);}
+
+/* Tombol Keluar: tombol beneran, bukan teks tipis lagi */
+.btn-logout{
+  display:inline-flex; align-items:center; gap:6px;
+  text-decoration:none;
+  font-family:'Inter', sans-serif; font-weight:700; font-size:12.5px;
+  color:var(--white);
+  padding:9px 18px;
+  border-radius:999px;
+  background:transparent;
+  border:1.5px solid var(--white);
+  opacity:0.85;
+  transition:opacity .15s ease, background .15s ease;
+}
+.btn-logout:hover{opacity:1; background:rgba(255,255,255,0.15);}
+
+/* ---------- Tabs ---------- */
+.tabs{
+  max-width:1140px; margin:0 auto;
+  display:flex; gap:8px; flex-wrap:wrap;
+  padding:18px 24px 0;
+}
+.tab-btn{
+  font-family:'Inter', sans-serif;
+  font-size:13.5px; font-weight:600;
+  padding:10px 18px;
+  background:var(--white);
+  border:1.5px solid var(--green-line);
+  border-radius:999px;
+  color:var(--ink-soft);
+  cursor:pointer;
+  transition:all .15s ease;
+}
+.tab-btn:hover{color:var(--ink); border-color:var(--green);}
+.tab-btn.active{
+  color:var(--white);
+  background:var(--green);
+  border-color:var(--green);
+  font-weight:700;
+}
+
+main{
+  max-width:1140px; margin:0 auto;
+  padding:22px 24px 64px;
+}
+.panel{
+  background:var(--white);
+  border:1px solid var(--green-line);
+  border-radius:20px;
+  padding:24px 24px 28px;
+  box-shadow:var(--shadow-md);
+}
+.panel + .panel{margin-top:18px;}
+.hidden{display:none !important;}
+
+/* ---------- Section headers ---------- */
+.section-title{
+  font-family:'Manrope', sans-serif;
+  font-weight:800;
+  font-size:20px;
+  margin:0 0 3px;
+  color:var(--ink);
+  display:flex; align-items:center; gap:9px;
+}
+.section-sub{
+  font-size:13px; color:var(--ink-soft); margin:0 0 18px;
+}
+.rule{
+  border:0;
+  height:2px;
+  background:var(--green-soft);
+  margin:0 0 20px;
+}
+
+/* ---------- Charts row ---------- */
+.chart-row{
+  display:grid; grid-template-columns:1.6fr 1fr; gap:16px; margin-bottom:22px;
+}
+.chart-card{
+  background:var(--green-soft);
+  border:1px solid var(--green-line);
+  border-radius:16px;
+  padding:16px 18px 8px;
+}
+.chart-card h3{
+  font-family:'Manrope', sans-serif; font-size:13.5px; font-weight:700;
+  color:var(--ink); margin:0 0 10px;
+}
+.chart-card canvas{max-height:200px;}
+@media (max-width:760px){ .chart-row{grid-template-columns:1fr;} }
+
+/* ---------- Ringkasan: kartu stat ---------- */
+.capsule-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(230px,1fr));
+  gap:14px;
+}
+.capsule{
+  position:relative;
+  background:var(--white);
+  border:1px solid var(--green-line);
+  border-radius:16px;
+  padding:16px 16px 15px;
+  box-shadow:var(--shadow-sm);
+  transition:transform .15s ease, box-shadow .15s ease;
+  overflow:hidden;
+}
+.capsule:hover{transform:translateY(-3px); box-shadow:var(--shadow-md);}
+.capsule::before{
+  content:"";
+  position:absolute; top:0; left:0; right:0; height:4px;
+  background:var(--green-line);
+}
+.capsule.g::before{background:var(--green);}
+.capsule.y::before{background:var(--amber);}
+.capsule.r::before{background:var(--red);}
+.capsule-body{min-width:0;}
+.capsule-label{
+  font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+  color:var(--ink-soft); margin:0 0 6px; font-weight:600;
+}
+.capsule-value{
+  font-family:'JetBrains Mono', monospace;
+  font-weight:700; font-size:20px; margin:0;
+  color:var(--ink);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.capsule-target{font-size:11.5px; color:var(--ink-soft); margin-top:5px;}
+
+/* ---------- Data tables ---------- */
+table.data{
+  width:100%; border-collapse:separate; border-spacing:0; font-size:13.5px;
+}
+table.data th{
+  text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:.05em;
+  color:var(--ink-soft); font-weight:700;
+  padding:10px 12px; background:var(--green-soft);
+}
+table.data th:first-child{border-radius:10px 0 0 10px;}
+table.data th:last-child{border-radius:0 10px 10px 0;}
+table.data td{
+  padding:11px 12px; border-bottom:1px solid var(--green-line);
+  font-family:'JetBrains Mono', monospace;
+}
+table.data td.label{font-family:'Inter', sans-serif; font-weight:600; color:var(--ink);}
+table.data tr:last-child td{border-bottom:none;}
+table.data tr:hover td{background:var(--green-soft);}
+
+.status-pill{
+  display:inline-flex; align-items:center; gap:5px;
+  padding:4px 12px; border-radius:999px;
+  font-family:'Inter', sans-serif; font-size:11.5px; font-weight:700;
+}
+.status-pill.g{background:var(--green-soft); color:var(--ink);}
+.status-pill.y{background:var(--amber-bg); color:var(--amber);}
+.status-pill.r{background:var(--red-bg); color:var(--red);}
+
+/* ---------- Forms ---------- */
+.field-grid{
+  display:grid; grid-template-columns:repeat(auto-fill, minmax(210px,1fr)); gap:14px;
+}
+.field{display:flex; flex-direction:column; gap:5px;}
+.field label{font-size:12.5px; font-weight:600; color:var(--ink-soft);}
+.field input, .field select{
+  font-family:'JetBrains Mono', monospace;
+  padding:10px 12px; border:1.5px solid var(--green-line); border-radius:10px;
+  font-size:14px; background:var(--green-soft); color:var(--ink);
+}
+.field input:focus, .field select:focus{
+  outline:none; border-color:var(--green); background:var(--white);
+}
+.btn{
+  font-family:'Inter', sans-serif; font-weight:700; font-size:14px;
+  padding:12px 24px; border-radius:12px; border:none; cursor:pointer;
+  background:var(--green);
+  color:var(--white);
+  transition:transform .12s ease, box-shadow .12s ease;
+}
+.btn:hover{transform:translateY(-1px); box-shadow:var(--shadow-md);}
+.btn.secondary{background:transparent; color:var(--ink); border:1.5px solid var(--green);}
+.btn-row{display:flex; gap:10px; margin-top:18px; flex-wrap:wrap;}
+.msg{font-size:13px; padding:11px 14px; border-radius:10px; margin-top:12px; font-weight:500;}
+.msg.ok{background:var(--green-soft); color:var(--ink);}
+.msg.err{background:var(--red-bg); color:var(--red);}
+
+/* ---------- Login page ---------- */
+.login-wrap{
+  min-height:100vh; display:flex; align-items:center; justify-content:center;
+  background:var(--green);
+  padding:20px;
+}
+.login-card{
+  background:var(--white); border-radius:20px; padding:38px 34px;
+  width:100%; max-width:390px; box-shadow:var(--shadow-md);
+}
+.login-card .brand-eyebrow{color:var(--ink-soft); opacity:1;}
+.login-card h1{
+  font-family:'Manrope', sans-serif; font-weight:800; font-size:25px; margin:2px 0 22px; color:var(--ink);
+}
+.login-card .field{margin-bottom:14px;}
+.login-card .btn{width:100%; margin-top:6px;}
+
+footer.credit{
+  text-align:center; font-size:11.5px; color:var(--ink-soft);
+  padding:26px; font-family:'JetBrains Mono', monospace;
+}
+
+@media (max-width:640px){
+  .masthead-inner{flex-direction:column; align-items:flex-start;}
+  .masthead-meta{text-align:left;}
+}
